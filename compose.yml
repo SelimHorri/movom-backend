@@ -2,13 +2,17 @@ version: '3.9'
 services:
   postgres:
     image: 'postgres:16-alpine'
+    container_name: postgres
+    restart: always
     environment:
-      - 'POSTGRES_DB=mydatabase'
-      - 'POSTGRES_PASSWORD=secret'
-      - 'POSTGRES_USER=myuser'
+      - 'POSTGRES_DB=movom_db'
+      - 'POSTGRES_USER=postgres'
+      - 'POSTGRES_PASSWORD=postgres'
     ports:
       - '5432:5432'
-  zipkin:
-    image: 'openzipkin/zipkin:3.4'
-    ports:
-      - '9411:9411'
+#  zipkin:
+#    image: 'openzipkin/zipkin:3.4'
+#    container_name: zipkin
+#    restart: always
+#    ports:
+#      - '9411:9411'
