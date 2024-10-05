@@ -19,6 +19,16 @@ spring:
     locations:
       - classpath:db/migration/{vendor}
       - classpath:db/migration/{vendor}/@mainActiveProfile@
+  jackson:
+    serialization:
+      indent-output: true
+
+management:
+  endpoint:
+    health:
+      show-details: when-authorized
+      probes:
+        enabled: true
 
 logging:
   level:

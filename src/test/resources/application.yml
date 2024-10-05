@@ -3,4 +3,4 @@ spring:
     compose:
       enabled: false
   datasource:
-    url: jdbc:tc:postgresql:16-alpine:///movom_test_db
+    url: jdbc:tc:postgresql:17-alpine:///movom_test_db

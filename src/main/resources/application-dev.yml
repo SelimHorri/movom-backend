@@ -4,3 +4,9 @@ spring:
       lifecycle-management: start_and_stop
       stop:
         command: down
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
