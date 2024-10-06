@@ -22,8 +22,8 @@ public class AccomodationEntity extends AbstractAuditingEntity {
 	@Column(name = "full_address", nullable = false)
 	private String fullAddress;
 	
-	@Column(name = "zip_code")
-	private String zipCode;
+	@Column(name = "zipcode")
+	private String zipcode;
 	
 	@Column(name = "country_dial_code", nullable = false)
 	private String countryDialCode;

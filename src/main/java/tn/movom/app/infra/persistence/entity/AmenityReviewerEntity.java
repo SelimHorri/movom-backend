@@ -1,8 +1,12 @@
 package tn.movom.app.infra.persistence.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import tn.movom.app.movom.accomodation.domain.RatingValue;
 
 import java.time.LocalDateTime;
 
@@ -15,7 +19,7 @@ import java.time.LocalDateTime;
 @SuperBuilder
 public class AmenityReviewerEntity extends AbstractAuditingEntity {
 	
-	@Enumerated(EnumType.ORDINAL)
+	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
 	private RatingValue rate;
 	
@@ -32,21 +36,6 @@ public class AmenityReviewerEntity extends AbstractAuditingEntity {
 	@ManyToOne
 	@JoinColumn(name = "reviewer_id")
 	private ActorEntity reviewer;
-	
-	
-}
-
-@RequiredArgsConstructor
-@Getter
-enum RatingValue {
-	
-	VERY_BAD(1),
-	BAD(2),
-	NEUTRAL(3),
-	GOOD(4),
-	PERFECT(5);
-	
-	private final int ratingValue;
 	
 }
 

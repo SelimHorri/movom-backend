@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import tn.movom.app.movom.event.domain.MovomEventStatus;
 
 import java.time.LocalDateTime;
 
@@ -50,16 +51,6 @@ public class MovomEventEntity extends AbstractAuditingEntity {
 	@ManyToOne
 	@JoinColumn(name = "country_id")
 	private CountryEntity country;
-	
-}
-
-enum MovomEventStatus {
-	
-	NOT_STARTED,
-	IN_PROGRESS,
-	FINISHED,
-	//REPORTED,
-	CANCELLED
 	
 }
 

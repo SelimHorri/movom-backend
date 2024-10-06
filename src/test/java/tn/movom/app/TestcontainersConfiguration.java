@@ -11,7 +11,7 @@ import org.testcontainers.utility.DockerImageName;
 @TestConfiguration(proxyBeanMethods = false)
 class TestcontainersConfiguration {
 	
-	private static final String POSTGRES_IMAGE = "postgres:17-alpine";
+	private static final String POSTGRES_IMAGE = "postgres:16-alpine";
 	//private static final String ZIPKIN_IMAGE = "openzipkin/zipkin:3.4";
 	
 	@Bean

@@ -1,0 +1,20 @@
+create table if not exists actors (
+    id bigserial primary key,
+    uid uuid,
+    ssn varchar(255),
+    is_verified boolean,
+    firstname varchar(255),
+    lastname varchar(255),
+    email varchar(255),
+    self_description varchar(255),
+    phone varchar(255),
+    country_dial_code varchar(255),
+    speaking_langs varchar(255),
+    job_title varchar(255),
+    joined_at date,
+    credential_id bigint,
+    created_at timestamp,
+    created_by varchar(255),
+    updated_at timestamp,
+    updated_by varchar(255)
+);
