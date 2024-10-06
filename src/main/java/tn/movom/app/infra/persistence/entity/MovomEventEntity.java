@@ -9,6 +9,7 @@ import lombok.experimental.SuperBuilder;
 import tn.movom.app.movom.event.domain.MovomEventStatus;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Table(name = "movom_events")
@@ -51,6 +52,9 @@ public class MovomEventEntity extends AbstractAuditingEntity {
 	@ManyToOne
 	@JoinColumn(name = "country_id")
 	private CountryEntity country;
+	
+	@OneToMany(mappedBy = "movomEvent", orphanRemoval = true, cascade = CascadeType.ALL)
+	private Set<MovomEventFavouriteEntity> movomEventFavourites;
 	
 }
 

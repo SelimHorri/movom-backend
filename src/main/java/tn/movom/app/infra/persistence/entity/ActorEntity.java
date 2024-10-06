@@ -63,6 +63,9 @@ public class ActorEntity extends AbstractAuditingEntity {
 	private Set<SportFavouriteEntity> sportFavourites;
 	
 	@OneToMany(mappedBy = "actor", orphanRemoval = true, cascade = CascadeType.ALL)
+	private Set<MovomEventFavouriteEntity> movomEventFavourites;
+	
+	@OneToMany(mappedBy = "actor", orphanRemoval = true, cascade = CascadeType.ALL)
 	private Set<AccomodationEntity> accomodations;
 	
 	@OneToMany(mappedBy = "reviewer")

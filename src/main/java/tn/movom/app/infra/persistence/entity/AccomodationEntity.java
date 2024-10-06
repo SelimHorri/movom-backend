@@ -7,6 +7,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "accomodations")
 @NoArgsConstructor
@@ -39,6 +41,9 @@ public class AccomodationEntity extends AbstractAuditingEntity {
 	@ManyToOne
 	@JoinColumn(name = "actor_id")
 	private ActorEntity actor;
+	
+	@OneToMany(mappedBy = "accomodation", orphanRemoval = true, cascade = CascadeType.ALL)
+	private Set<AmenityEntity> amenities;
 	
 }
 
