@@ -45,6 +45,62 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "MovomEvent",
+			"item": [
+				{
+					"name": "find all movom events",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/movom/api/v1/events?end_day=11-10-2024&offset=0&sort_direction=desc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movom",
+								"api",
+								"v1",
+								"events"
+							],
+							"query": [
+								{
+									"key": "start_day",
+									"value": "10-10-2024",
+									"disabled": true
+								},
+								{
+									"key": "end_day",
+									"value": "11-10-2024"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "sort_direction",
+									"value": "desc"
+								},
+								{
+									"key": "sort_by",
+									"value": "createdAt",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
