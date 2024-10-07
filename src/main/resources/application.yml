@@ -1,5 +1,7 @@
 movom:
-  api-version: /api/v1/${spring.application.name}
+  api-version: /${spring.application.name}/api/v1
+  security:
+    is-enabled: false
 
 spring:
   application:
@@ -20,6 +22,10 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: none
+    properties:
+      hibernate:
+        use_sql_comments: true
+        format_sql: true
   flyway:
     locations:
       - classpath:db/migration/{vendor}
@@ -27,7 +33,9 @@ spring:
   jackson:
     serialization:
       indent-output: true
-
+  docker:
+    compose:
+      enabled: false
 management:
   endpoint:
     health:
@@ -40,3 +48,6 @@ logging:
     tn:
       movom:
         app: TRACE
+    org:
+      springframework:
+        security: DEBUG

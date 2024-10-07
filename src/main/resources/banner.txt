@@ -1,0 +1,20 @@
+${AnsiColor.MAGENTA}
+ ,ggg, ,ggg,_,ggg,    _,gggggg,_      ,ggg,         ,gg  _,gggggg,_      ,ggg, ,ggg,_,ggg,  
+dP""Y8dP""Y88P""Y8b ,d8P""d8P"Y8b,   dP""Y8a       ,8P ,d8P""d8P"Y8b,   dP""Y8dP""Y88P""Y8b 
+Yb, `88'  `88'  `88,d8'   Y8   "8b,dPYb, `88       d8',d8'   Y8   "8b,dPYb, `88'  `88'  `88 
+ `"  88    88    88d8'    `Ybaaad88P' `"  88       88 d8'    `Ybaaad88P' `"  88    88    88 
+     88    88    888P       `""""Y8       88       88 8P       `""""Y8       88    88    88 
+     88    88    888b            d8       I8       8I 8b            d8       88    88    88 
+     88    88    88Y8,          ,8P       `8,     ,8' Y8,          ,8P       88    88    88 
+     88    88    88`Y8,        ,8P'        Y8,   ,8P  `Y8,        ,8P'       88    88    88 
+     88    88    Y8,`Y8b,,__,,d8P'          Yb,_,dP    `Y8b,,__,,d8P'        88    88    Y8,
+     88    88    `Y8  `"Y8888P"'             "Y8P"       `"Y8888P"'          88    88    `Y8
+${AnsiColor.BRIGHT_GREEN}
+___ ____ _  _ ____ _ ____ _  _    ____ ___  ____ ____ ___ _ ____ 
+ |  |  | |  | |__/ | [__  |\/|    [__  |__] |  | |__/  |  | |___ 
+ |  |__| |__| |  \ | ___] |  |    ___] |    |__| |  \  |  | |    
+
+${AnsiColor.CYAN}Backend application
+${AnsiColor.RED}
+Running Java ${java.version} ☕️☕️☕️ ${application.title} ${application.version}
+Spring Boot ${spring-boot.version}

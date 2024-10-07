@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: movom
   docker:
     compose:
       enabled: false
