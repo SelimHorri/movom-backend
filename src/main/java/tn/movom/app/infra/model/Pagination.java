@@ -4,6 +4,8 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.util.StringUtils;
 import tn.movom.app.constant.AppConstants;
@@ -82,6 +84,14 @@ public final class Pagination {
 		catch (NumberFormatException e) {
 			throw new PaginationException("Pagination params are invalid");
 		}
+	}
+	
+	public Pageable toPageable() {
+		return PageRequest.of(
+				this.offset,
+				this.size,
+				this.sortDirection,
+				this.sortBy);
 	}
 	
 }

@@ -202,6 +202,7 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>${project.artifactId}-v${project.version}</finalName>
     </build>
     
     <profiles>

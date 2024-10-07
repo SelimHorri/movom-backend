@@ -32,6 +32,19 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Country",
+			"item": [
+				{
+					"name": "all counties",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }

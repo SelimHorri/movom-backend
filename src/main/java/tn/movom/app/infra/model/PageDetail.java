@@ -1,5 +1,6 @@
 package tn.movom.app.infra.model;
 
+import lombok.NonNull;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
@@ -12,7 +13,7 @@ public record PageDetail<T>(List<T> content,
 							Boolean first,
 							Boolean last) {
 	
-	public static <T> PageDetail<T> from(Page<T> page) {
+	public static <T> PageDetail<T> from(@NonNull Page<T> page) {
 		return new PageDetail<>(
 				page.getContent(),
 				page.getNumber(),

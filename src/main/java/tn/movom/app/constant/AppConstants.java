@@ -14,6 +14,8 @@ public final class AppConstants {
 	public static final String DEFAULT_PAGING_SORT_DIRECTION = "DESC";
 	public static final String DEFAULT_PAGING_SORT_BY = "createdAt";
 	
+	public static final String DB_STRING_SEPARATOR = ",";
+	
 }
 
 
