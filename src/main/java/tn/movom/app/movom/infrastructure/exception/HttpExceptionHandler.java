@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import tn.movom.app.infra.model.payload.ApiPayload;
@@ -16,7 +17,32 @@ import java.net.URI;
 class HttpExceptionHandler {
 	
 	@ExceptionHandler
-	ResponseEntity<ProblemDetail> handleException(Exception e, HttpServletRequest request) {
+	ResponseEntity<ApiPayload<ProblemDetail>> handleValidationException(MethodArgumentNotValidException e, HttpServletRequest request) {
+		record InvalidField(String objName, String fieldName, String reason) {}
+		
+		var invalidFields = e.getBindingResult().getFieldErrors().stream()
+				.map(field -> new InvalidField(
+						field.getObjectName(),
+						field.getField(),
+						field.getDefaultMessage()))
+				.toList();
+		
+		var problemDetail = ProblemDetail.forStatusAndDetail(e.getStatusCode(), e.getMessage());
+		problemDetail.setType(URI.create(e.getClass().getSimpleName()));
+		problemDetail.setInstance(URI.create(request.getRequestURI()));
+		problemDetail.setProperty("constraintViolations", invalidFields);
+		log.error(e.getMessage());
+		log.error(problemDetail.toString());
+		
+		var payload = ApiPayload.ofFailure(problemDetail);
+		
+		return ResponseEntity
+				.status(payload.body().getStatus())
+				.body(payload);
+	}
+	
+	@ExceptionHandler
+	ResponseEntity<ApiPayload<ProblemDetail>> handleException(Exception e, HttpServletRequest request) {
 		
 		var problemDetail = ProblemDetail.forStatusAndDetail(
 				HttpStatus.INTERNAL_SERVER_ERROR,
@@ -27,9 +53,10 @@ class HttpExceptionHandler {
 		log.error(problemDetail.toString());
 		
 		var payload = ApiPayload.ofFailure(problemDetail);
+		
 		return ResponseEntity
 				.status(payload.body().getStatus())
-				.body(payload.body());
+				.body(payload);
 	}
 	
 }
