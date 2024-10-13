@@ -1,9 +1,11 @@
 package tn.movom.app.infra.config;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.client.JdkClientHttpRequestFactory;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.support.RestClientAdapter;
@@ -24,12 +26,15 @@ class HttpClientsConfig {
 	
 	@Bean
 	RestClient restfulCountriesRestClient(RestClient restClient, MovomExternalApiProps movomExternalApiProps) {
+		var api = movomExternalApiProps.externalApis().stream()
+				.filter(externalApi -> "restfulcountries".equalsIgnoreCase(externalApi.name()))
+				.findAny()
+				.orElseThrow();
+		var bearer = "Bearer" + StringUtils.SPACE;
+		
 		return restClient.mutate()
-				.baseUrl(movomExternalApiProps.externalApis().stream()
-						.filter(externalApi -> "restfulcountries".equalsIgnoreCase(externalApi.name()))
-						.map(MovomExternalApiProps.ExternalApi::baseUrl)
-						.findAny()
-						.orElseThrow())
+				.baseUrl(api.baseUrl())
+				.defaultHeader(HttpHeaders.AUTHORIZATION, bearer + api.accessToken())
 				.build();
 	}
 	

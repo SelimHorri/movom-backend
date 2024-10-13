@@ -4,7 +4,7 @@ movom:
     is-enabled: false
   external-apis:
     - name: restfulcountries
-      base-url: https://restfulcountries.com
+      base-url: https://restfulcountries.com/api/v1
       requires-authz: true
       access-token: ${RESTFULCOUNTRIES_ACCESS_TOKEN}
 

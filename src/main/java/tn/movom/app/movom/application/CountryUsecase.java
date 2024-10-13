@@ -22,7 +22,6 @@ public class CountryUsecase {
 	public List<Country> findAllCountries() {
 		return this.countryRepository.findAll().stream()
 				.map(CountryMapper::from)
-				//.map(null)
 				.sorted(Comparator
 						.comparing(Country::name)
 						.thenComparing(Country::dialCode))
