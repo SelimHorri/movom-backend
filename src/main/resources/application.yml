@@ -2,6 +2,11 @@ movom:
   api-version: /${spring.application.name}/api/v1
   security:
     is-enabled: false
+  external-apis:
+    - name: restfulcountries
+      base-url: https://restfulcountries.com
+      requires-authz: true
+      access-token: ${RESTFULCOUNTRIES_ACCESS_TOKEN}
 
 spring:
   application:
@@ -36,6 +41,9 @@ spring:
   docker:
     compose:
       enabled: false
+  config:
+    import: optional:import/secrets/restfulcountries-secrets.yml
+
 management:
   endpoint:
     health:

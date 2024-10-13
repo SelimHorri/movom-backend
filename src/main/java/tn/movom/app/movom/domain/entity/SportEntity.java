@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-import tn.movom.app.movom.domain.Sport;
 
 import java.util.Set;
 
@@ -30,10 +29,6 @@ public class SportEntity extends AbstractAuditingEntity {
 	
 	@OneToMany(mappedBy = "sport", orphanRemoval = true, cascade = CascadeType.ALL)
 	private Set<SportFavouriteEntity> sportFavourites;
-	
-	public Sport toSport() {
-		return new Sport(this.getUid(), this.name, this.competitionName);
-	}
 	
 }
 

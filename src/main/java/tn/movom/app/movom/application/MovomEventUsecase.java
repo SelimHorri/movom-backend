@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import tn.movom.app.infra.model.PageDetail;
 import tn.movom.app.infra.model.Pagination;
 import tn.movom.app.movom.domain.MovomEvent;
-import tn.movom.app.movom.domain.entity.MovomEventEntity;
+import tn.movom.app.movom.domain.mapper.MovomEventMapper;
 import tn.movom.app.movom.domain.repository.MovomEventRepository;
 
 import java.time.LocalDate;
@@ -26,7 +26,7 @@ public class MovomEventUsecase {
 			log.info("find all movom events without date range.");
 			var pageableMovomEvents = this.movomEventRepository
 					.findAll(pagination.toPageable())
-					.map(MovomEventEntity::toMovomEvent);
+					.map(MovomEventMapper::from);
 			return PageDetail.from(pageableMovomEvents);
 		}
 		
@@ -40,7 +40,7 @@ public class MovomEventUsecase {
 		
 		var pageableMovomEvents = this.movomEventRepository
 				.findAllBetweenStartsAtAndEndsAt(startsAt, endsAt, pagination.toPageable())
-				.map(MovomEventEntity::toMovomEvent);
+				.map(MovomEventMapper::from);
 		
 		return PageDetail.from(pageableMovomEvents);
 	}

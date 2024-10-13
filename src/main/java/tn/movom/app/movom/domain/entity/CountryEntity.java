@@ -9,7 +9,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-import tn.movom.app.movom.domain.Country;
 
 import java.util.Set;
 
@@ -30,10 +29,6 @@ public class CountryEntity extends AbstractAuditingEntity {
 	
 	@OneToMany(mappedBy = "country")
 	private Set<MovomEventEntity> movomEvents;
-	
-	public Country toCountry() {
-		return new Country(this.getUid(), this.dialCode, this.name);
-	}
 	
 }
 

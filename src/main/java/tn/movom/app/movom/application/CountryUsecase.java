@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tn.movom.app.movom.domain.Country;
-import tn.movom.app.movom.domain.entity.CountryEntity;
+import tn.movom.app.movom.domain.mapper.CountryMapper;
 import tn.movom.app.movom.domain.repository.CountryRepository;
 
 import java.util.Comparator;
@@ -21,7 +21,8 @@ public class CountryUsecase {
 	
 	public List<Country> findAllCountries() {
 		return this.countryRepository.findAll().stream()
-				.map(CountryEntity::toCountry)
+				.map(CountryMapper::from)
+				//.map(null)
 				.sorted(Comparator
 						.comparing(Country::name)
 						.thenComparing(Country::dialCode))
