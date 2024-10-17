@@ -1,13 +1,14 @@
 package tn.movom.app.movom.domain.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import tn.movom.app.movom.domain.entity.CountryEntity;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface CountryRepository extends JpaRepository<CountryEntity, Long> {
+public interface CountryRepository {
 	
+	List<CountryEntity> findAll();
 	Optional<CountryEntity> findByUid(UUID uid);
 	Optional<CountryEntity> findByDialCode(String dialCode);
 	

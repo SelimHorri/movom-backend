@@ -32,7 +32,7 @@ class MovomEventController {
 																 @RequestParam(required = false, name = "sort_by") String sortBy) {
 		var pageableMovomEvents = this.movomEventUsecase
 				.findAllMovomEventsBetween(startDay, endDay, Pagination.of(offset, size, sortDirection, sortBy));
-		return ApiPayload.ofSuccess(pageableMovomEvents.pageSize(), pageableMovomEvents);
+		return ApiPayload.ofSuccess(pageableMovomEvents.content().size(), pageableMovomEvents);
 	}
 	
 }

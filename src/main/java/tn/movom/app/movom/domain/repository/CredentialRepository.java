@@ -1,12 +1,11 @@
 package tn.movom.app.movom.domain.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import tn.movom.app.movom.domain.entity.CredentialEntity;
 
 import java.util.Optional;
 import java.util.UUID;
 
-public interface CredentialRepository extends JpaRepository<CredentialEntity, Long> {
+public interface CredentialRepository {
 	
 	Optional<CredentialEntity> findByUid(UUID uid);
 	Optional<CredentialEntity> findByUsernameIgnoreCase(String username);

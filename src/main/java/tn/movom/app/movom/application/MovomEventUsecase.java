@@ -24,10 +24,9 @@ public class MovomEventUsecase {
 	public PageDetail<MovomEvent> findAllMovomEventsBetween(LocalDate startDay, LocalDate endDay, Pagination pagination) {
 		if (startDay == null && endDay == null) {
 			log.info("find all movom events without date range.");
-			var pageableMovomEvents = this.movomEventRepository
-					.findAll(pagination.toPageable())
+			return this.movomEventRepository
+					.findAll(pagination)
 					.map(MovomEventMapper::from);
-			return PageDetail.from(pageableMovomEvents);
 		}
 		
 		var startsAt = (startDay != null) ? startDay.atStartOfDay() : LocalDateTime.now();
@@ -38,11 +37,9 @@ public class MovomEventUsecase {
 		
 		log.info("find all movom events between startsAt: {} & endsAt: {}.", startsAt, endsAt);
 		
-		var pageableMovomEvents = this.movomEventRepository
-				.findAllBetweenStartsAtAndEndsAt(startsAt, endsAt, pagination.toPageable())
+		return this.movomEventRepository
+				.findAllBetweenStartsAtAndEndsAt(startsAt, endsAt, pagination)
 				.map(MovomEventMapper::from);
-		
-		return PageDetail.from(pageableMovomEvents);
 	}
 	
 }
