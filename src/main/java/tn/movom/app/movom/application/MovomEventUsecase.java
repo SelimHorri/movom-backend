@@ -2,8 +2,7 @@ package tn.movom.app.movom.application;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import tn.movom.app.movom.Usecase;
 import tn.movom.app.infra.model.PageDetail;
 import tn.movom.app.infra.model.Pagination;
 import tn.movom.app.movom.domain.MovomEvent;
@@ -13,8 +12,7 @@ import tn.movom.app.movom.domain.repository.MovomEventRepository;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@Service
-@Transactional(readOnly = true)
+@Usecase
 @Slf4j
 @RequiredArgsConstructor
 public class MovomEventUsecase {
