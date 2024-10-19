@@ -1,5 +1,7 @@
 package tn.movom.app.infra.config;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -27,11 +29,10 @@ class HttpClientsConfig {
 	@Bean
 	RestClient restfulCountriesRestClient(RestClient restClient, MovomExternalApiProps movomExternalApiProps) {
 		var api = movomExternalApiProps.externalApis().stream()
-				.filter(externalApi -> "restfulcountries".equalsIgnoreCase(externalApi.name()))
+				.filter(externalApi -> ExternalApiNames.RESTFULCOUNTRIES.getName().equalsIgnoreCase(externalApi.name()))
 				.findAny()
 				.orElseThrow();
 		var bearer = "Bearer" + StringUtils.SPACE;
-		
 		return restClient.mutate()
 				.baseUrl(api.baseUrl())
 				.defaultHeader(HttpHeaders.AUTHORIZATION, bearer + api.accessToken())
@@ -45,6 +46,16 @@ class HttpClientsConfig {
 				.build()
 				.createClient(CountryHttpClient.class);
 	}
+	
+}
+
+@RequiredArgsConstructor
+@Getter
+enum ExternalApiNames {
+	
+	RESTFULCOUNTRIES("restfulcountries");
+	
+	private final String name;
 	
 }
 
