@@ -55,9 +55,9 @@ public final class Pagination {
 	}
 	
 	private static Pagination ofParams(final String offsetParam,
-											 final String sizeParam,
-											 final String sortDirectionParam,
-											 final String sortByParam) {
+									   final String sizeParam,
+									   final String sortDirectionParam,
+									   final String sortByParam) {
 		try {
 			final int offset = Integer.parseInt(offsetParam);
 			if (offset < 0)

@@ -50,8 +50,8 @@ class RemoteCountryDataRetriever implements CountryDataRetriever {
 	
 	@Override
 	public List<CountryInfo> findAllByContinent(String continent) {
-		return call(() -> this.countryClient.findAllByContinent(continent)
-						.data().stream()
+		return call(() -> this.countryClient
+						.findAllByContinent(continent).data().stream()
 						.map(RemoteCountryDataRetriever::convertFrom)
 						.toList(),
 				List::of);

@@ -27,9 +27,9 @@ class HttpExceptionHandler {
 						field.getDefaultMessage()))
 				.toList();
 		
-		var problemDetail = ProblemDetail.forStatusAndDetail(e.getStatusCode(), e.getMessage());
+		var problemDetail = ProblemDetail.forStatusAndDetail(e.getStatusCode(), "There is|are validation(s) error(s)");
 		problemDetail.setType(URI.create(e.getClass().getSimpleName()));
-		problemDetail.setInstance(URI.create(request.getRequestURI()));
+		problemDetail.setInstance(URI.create(request.getRequestURL().toString()));
 		problemDetail.setProperty("constraintViolations", invalidFields);
 		log.error(e.getMessage());
 		log.error(problemDetail.toString());
@@ -48,7 +48,7 @@ class HttpExceptionHandler {
 				HttpStatus.INTERNAL_SERVER_ERROR,
 				"Oups! An error has happened, please try later");
 		problemDetail.setType(URI.create(e.getClass().getSimpleName()));
-		problemDetail.setInstance(URI.create(request.getRequestURI()));
+		problemDetail.setInstance(URI.create(request.getRequestURL().toString()));
 		log.error(e.getMessage());
 		log.error(problemDetail.toString());
 		
