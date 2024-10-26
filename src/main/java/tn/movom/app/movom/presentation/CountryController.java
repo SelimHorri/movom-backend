@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import tn.movom.app.infra.model.payload.ApiPayload;
+import tn.movom.app.movom.application.CountriesByContinent;
 import tn.movom.app.movom.application.CountryUsecase;
 import tn.movom.app.movom.domain.Country;
 
@@ -24,6 +25,12 @@ class CountryController {
 	ApiPayload<List<Country>> findAllCountries() {
 		var allCountries = this.countryUsecase.findAllCountries();
 		return ApiPayload.ofSuccess(allCountries.size(), allCountries);
+	}
+	
+	@GetMapping("/by-continents")
+	ApiPayload<List<CountriesByContinent>> findAllCountriesByContinents() {
+		var countriesByContinents = this.countryUsecase.findAllCountriesByContinents();
+		return ApiPayload.ofSuccess(countriesByContinents.size(), countriesByContinents);
 	}
 	
 }

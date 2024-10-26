@@ -49,7 +49,8 @@ public final class MovomEventMapper {
 				.country(new Country(
 						movomEvent.getCountry().getUid(),
 						movomEvent.getCountry().getDialCode(),
-						movomEvent.getCountry().getName()))
+						movomEvent.getCountry().getName(),
+						movomEvent.getCountry().getContinent()))
 				.build();
 	}
 	

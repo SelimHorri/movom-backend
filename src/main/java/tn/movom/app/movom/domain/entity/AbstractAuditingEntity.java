@@ -51,6 +51,8 @@ class AuditingEntityListener {
 	
 	@PrePersist
 	void preCreation(AbstractAuditingEntity auditable) {
+		auditable.setUid(UUID.randomUUID());
+		
 		var now = Instant.now();
 		auditable.setCreatedAt(now);
 		auditable.setUpdatedAt(now);

@@ -41,15 +41,15 @@ public class MovomEventEntity extends AbstractAuditingEntity {
 	@Column(name = "facility_name", nullable = false)
 	private String facilityName;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "actor_id")
 	private ActorEntity actor;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "sport_id")
 	private SportEntity sport;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "country_id")
 	private CountryEntity country;
 	

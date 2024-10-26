@@ -2,8 +2,10 @@ package tn.movom.app.movom.infrastructure.client;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import lombok.Builder;
 
 @JsonNaming(SnakeCaseStrategy.class)
+@Builder
 record CountryNetworkInfo(String name,
 						  String fullName,
 						  String capital,

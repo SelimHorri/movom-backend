@@ -12,11 +12,11 @@ import java.util.UUID;
 public final class CountryMapper {
 	
 	public static Country from(CountryEntity country) {
-		return new Country(country.getUid(), country.getDialCode(), country.getName());
+		return new Country(country.getUid(), country.getDialCode(), country.getName(), country.getContinent());
 	}
 	
 	public static Country from(CountryInfo countryInfo) {
-		return new Country(UUID.randomUUID(), countryInfo.dialCode(), countryInfo.name());
+		return new Country(UUID.randomUUID(), countryInfo.dialCode(), countryInfo.name(), countryInfo.continent());
 	}
 	
 }

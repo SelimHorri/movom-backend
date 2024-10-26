@@ -7,6 +7,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import tn.movom.app.infra.model.Pagination;
 import tn.movom.app.movom.application.CountryDataRetriever;
 import tn.movom.app.movom.application.CountryInfo;
+import tn.movom.app.movom.domain.ContinentName;
 import tn.movom.app.movom.infrastructure.client.CountryHttpClient.UniCountryData;
 
 import java.util.List;
@@ -72,7 +73,7 @@ class RemoteCountryDataRetriever implements CountryDataRetriever {
 						? countryNetworkInfo.phoneCode()
 						: PHONE_CODE_PREFIX + countryNetworkInfo.phoneCode(),
 				countryNetworkInfo.name(),
-				countryNetworkInfo.continent());
+				ContinentName.findByName(countryNetworkInfo.continent()));
 	}
 	
 	private static <T> T call(Supplier<T> func, Supplier<T> orElseReturn) {

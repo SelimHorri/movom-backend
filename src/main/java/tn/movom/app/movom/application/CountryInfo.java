@@ -1,6 +1,8 @@
 package tn.movom.app.movom.application;
 
-public record CountryInfo(String dialCode, String name, String continent) {}
+import tn.movom.app.movom.domain.ContinentName;
+
+public record CountryInfo(String dialCode, String name, ContinentName continent) {}
 
 
 

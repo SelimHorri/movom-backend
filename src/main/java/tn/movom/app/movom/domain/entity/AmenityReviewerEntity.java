@@ -29,11 +29,11 @@ public class AmenityReviewerEntity extends AbstractAuditingEntity {
 	@Column(name = "reviewer_comment")
 	private String reviewerComment;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "amenity_id")
 	private AmenityEntity amenity;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "reviewer_id")
 	private ActorEntity reviewer;
 	

@@ -13,7 +13,7 @@ import java.util.UUID;
 interface CountryJpaRepository extends JpaRepository<CountryEntity, Long> {
 	
 	Optional<CountryEntity> findByUid(UUID uid);
-	Optional<CountryEntity> findByDialCode(String dialCode);
+	List<CountryEntity> findAllByDialCode(String dialCode);
 	
 }
 
@@ -32,8 +32,8 @@ class JpaCountryRepository implements CountryRepository {
 		return this.countryJpaRepository.findByUid(uid);
 	}
 	
-	public Optional<CountryEntity> findByDialCode(String dialCode) {
-		return this.countryJpaRepository.findByDialCode(dialCode);
+	public List<CountryEntity> findAllByDialCode(String dialCode) {
+		return this.countryJpaRepository.findAllByDialCode(dialCode);
 	}
 	
 }

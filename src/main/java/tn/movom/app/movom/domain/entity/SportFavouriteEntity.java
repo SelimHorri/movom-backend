@@ -21,11 +21,11 @@ public class SportFavouriteEntity extends AbstractAuditingEntity {
 	@Column(name = "favoured_at", nullable = false)
 	private LocalDateTime favouredAt;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "actor_id")
 	private ActorEntity actor;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "sport_id")
 	private SportEntity sport;
 	

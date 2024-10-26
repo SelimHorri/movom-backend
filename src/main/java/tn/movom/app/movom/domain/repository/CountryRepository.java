@@ -10,7 +10,7 @@ public interface CountryRepository {
 	
 	List<CountryEntity> findAll();
 	Optional<CountryEntity> findByUid(UUID uid);
-	Optional<CountryEntity> findByDialCode(String dialCode);
+	List<CountryEntity> findAllByDialCode(String dialCode);
 	
 }
 

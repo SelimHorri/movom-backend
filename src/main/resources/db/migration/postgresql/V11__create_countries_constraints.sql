@@ -14,6 +14,3 @@ alter column created_at set default now();
 
 alter table countries
 alter column updated_at set default now();
-
-alter table countries
-add constraint uk_dial_code_countries unique (dial_code);

@@ -6,6 +6,7 @@ import org.springframework.web.service.annotation.GetExchange;
 import org.springframework.web.service.annotation.HttpExchange;
 
 import java.util.List;
+import java.util.Objects;
 
 @HttpExchange("/countries")
 public interface CountryHttpClient {
@@ -25,8 +26,20 @@ public interface CountryHttpClient {
 	@GetExchange
 	MultiCountryData findAllByContinent(@RequestParam String continent, @RequestParam("per_page") int offset);
 	
-	record MultiCountryData(List<CountryNetworkInfo> data) {}
-	record UniCountryData(CountryNetworkInfo data) {}
+	record MultiCountryData(List<CountryNetworkInfo> data) {
+		
+		public MultiCountryData {
+			data = List.copyOf(Objects.requireNonNullElseGet(data, List::of));
+		}
+		
+	}
+	record UniCountryData(CountryNetworkInfo data) {
+		
+		public UniCountryData {
+			data = Objects.requireNonNullElseGet(data, CountryNetworkInfo.builder()::build);
+		}
+		
+	}
 	
 }
 

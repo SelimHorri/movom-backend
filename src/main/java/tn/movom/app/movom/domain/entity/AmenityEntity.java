@@ -23,7 +23,7 @@ public class AmenityEntity extends AbstractAuditingEntity {
 	
 	private String description;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "accomodation_id")
 	private AccomodationEntity accomodation;
 	

@@ -38,7 +38,7 @@ public class AccomodationEntity extends AbstractAuditingEntity {
 	
 	private String description;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "actor_id")
 	private ActorEntity actor;
 	

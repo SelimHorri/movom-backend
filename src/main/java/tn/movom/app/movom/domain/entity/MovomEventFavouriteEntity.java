@@ -21,11 +21,11 @@ public class MovomEventFavouriteEntity extends AbstractAuditingEntity {
 	@Column(name = "favoured_at", nullable = false)
 	private LocalDateTime favouredAt;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "actor_id")
 	private ActorEntity actor;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "movom_event_id")
 	private MovomEventEntity movomEvent;
 	
