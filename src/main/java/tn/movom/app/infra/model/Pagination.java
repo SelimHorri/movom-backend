@@ -1,13 +1,12 @@
 package tn.movom.app.infra.model;
 
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.util.StringUtils;
 import tn.movom.app.constant.AppConstants;
 import tn.movom.app.infra.exception.PaginationException;
 
@@ -15,25 +14,24 @@ import java.util.regex.Pattern;
 
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 @Data
-@Builder
 public final class Pagination {
 	
 	public static final String SORT_BY_DELIMITER = ",";
 	
-	private final Integer offset;
-	private final Integer size;
+	private final int offset;
+	private final int size;
 	private final Sort.Direction sortDirection;
 	private final String[] sortBy;
 	
-	public static Pagination of(final String offsetParam) {
+	public static Pagination of(String offsetParam) {
 		return of(offsetParam, null, null, null);
 	}
 	
-	public static Pagination of(final String offsetParam, final String sizeParam) {
+	public static Pagination of(String offsetParam, String sizeParam) {
 		return of(offsetParam, sizeParam, null, null);
 	}
 	
-	public static Pagination of(final String offsetParam, final String sizeParam, final String sortDirectionParam) {
+	public static Pagination of(String offsetParam, String sizeParam, String sortDirectionParam) {
 		return of(offsetParam, sizeParam, sortDirectionParam, null);
 	}
 	
@@ -48,42 +46,43 @@ public final class Pagination {
 		return ofParams(offsetParam, sizeParam, sortDirectionParam, sortByParam);
 	}
 	
-	private static String requireNonBlankOrElse(final String target, final String defaultValue) {
-		return org.apache.commons.lang3.StringUtils.isNotBlank(target)
+	private static String requireNonBlankOrElse(String target, String defaultValue) {
+		return StringUtils.isNotBlank(target)
 				? target
 				: defaultValue;
 	}
 	
-	private static Pagination ofParams(final String offsetParam,
-									   final String sizeParam,
-									   final String sortDirectionParam,
-									   final String sortByParam) {
-		try {
-			final int offset = Integer.parseInt(offsetParam);
-			if (offset < 0)
-				throw new PaginationException("Page offset must not be negatif");
-			
-			final int size = Integer.parseInt(sizeParam);
-			if (size < 0)
-				throw new PaginationException("Page size must not be negatif");
-			
-			return Pagination.builder()
-					.offset(offset)
-					.size(size)
-					.sortDirection(
-							AppConstants.DEFAULT_PAGING_SORT_DIRECTION.equalsIgnoreCase(sortDirectionParam)
-									? Sort.Direction.DESC
-									: Sort.Direction.ASC)
-					.sortBy(
-							sortByParam.lines()
-									.map(StringUtils::trimAllWhitespace)
-									.flatMap(Pattern.compile(SORT_BY_DELIMITER)::splitAsStream)
-									.toArray(String[]::new))
-					.build();
-		}
-		catch (NumberFormatException e) {
-			throw new PaginationException("Pagination params are invalid");
-		}
+	private static Pagination ofParams(String offsetParam,
+									   String sizeParam,
+									   String sortDirectionParam,
+									   String sortByParam) {
+		if (!isParamNumeric(offsetParam))
+			throw new PaginationException("Pagination offset param is not numeric");
+		if (!isParamNumeric(sizeParam))
+			throw new PaginationException("Pagination size param is not numeric");
+		
+		int offset = Integer.parseInt(offsetParam);
+		if (offset < 0)
+			throw new PaginationException("Page offset must not be negatif");
+		
+		int size = Integer.parseInt(sizeParam);
+		if (size < 0)
+			throw new PaginationException("Page size must not be negatif");
+		
+		return new Pagination(
+				offset,
+				size,
+				AppConstants.DEFAULT_PAGING_SORT_DIRECTION.equalsIgnoreCase(sortDirectionParam)
+						? Sort.Direction.DESC
+						: Sort.Direction.ASC,
+				sortByParam.lines()
+						.map(org.springframework.util.StringUtils::trimAllWhitespace)
+						.flatMap(Pattern.compile(SORT_BY_DELIMITER)::splitAsStream)
+						.toArray(String[]::new));
+	}
+	
+	private static boolean isParamNumeric(String param) {
+		return StringUtils.isNumeric(param);
 	}
 	
 	public Pageable toPageable() {
