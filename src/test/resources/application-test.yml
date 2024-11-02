@@ -1,8 +1,15 @@
 spring:
-  application:
-    name: movom
   docker:
     compose:
       enabled: false
   datasource:
     url: jdbc:tc:postgresql:16-alpine:///movom_test_db
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always

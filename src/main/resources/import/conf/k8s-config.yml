@@ -1,0 +1,14 @@
+server:
+  shutdown: graceful
+  #port: 0
+
+# TODO: *************** Value must match terminationGracePeriodSeconds in k8s deployment manifests ***************
+#spring:
+#  lifecycle:
+#    timeout-per-shutdown-phase: 20s
+
+management:
+  endpoint:
+    health:
+      probes:
+        enabled: true

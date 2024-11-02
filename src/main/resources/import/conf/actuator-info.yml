@@ -1,0 +1,8 @@
+management:
+  info:
+    env:
+      enabled: true
+
+info:
+  system: MOVOM Backend Application
+  title: ${spring.application.name}

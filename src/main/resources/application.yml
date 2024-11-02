@@ -43,14 +43,14 @@ spring:
     compose:
       enabled: false
   config:
-    import: optional:import/secrets/restfulcountries-secrets.yml
+    import:
+      - optional:import/secrets/restfulcountries-secrets.yml
+      - optional:import/conf/actuator-info.yml
 
 management:
   endpoint:
     health:
       show-details: when-authorized
-      probes:
-        enabled: true
 
 logging:
   level:
@@ -59,4 +59,13 @@ logging:
         app: TRACE
     org:
       springframework:
+        web: DEBUG
         security: DEBUG
+
+---
+
+spring:
+  config:
+    activate:
+      on-cloud-platform: kubernetes
+    import: optional:import/conf/k8s-config.yml
