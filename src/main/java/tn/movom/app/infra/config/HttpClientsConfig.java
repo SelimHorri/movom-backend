@@ -15,6 +15,8 @@ import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 import tn.movom.app.movom.infrastructure.client.CountryHttpClient;
 import tn.movom.app.movom.infrastructure.props.MovomExternalApiProps;
 
+import java.util.Arrays;
+
 @Configuration(proxyBeanMethods = false)
 class HttpClientsConfig {
 	
@@ -29,9 +31,11 @@ class HttpClientsConfig {
 	@Bean
 	RestClient restfulCountriesRestClient(RestClient restClient, MovomExternalApiProps movomExternalApiProps) {
 		var api = movomExternalApiProps.externalApis().stream()
-				.filter(externalApi -> ExternalApiNames.RESTFULCOUNTRIES.getName().equalsIgnoreCase(externalApi.name()))
+				.filter(externalApi -> ExternalApiNames.existsByName(externalApi.name()))
 				.findAny()
-				.orElseThrow();
+				.orElseThrow(() -> new IllegalArgumentException(
+						"No external api registered, only registered are: " + Arrays.toString(ExternalApiNames.values())));
+		
 		var bearer = "Bearer" + StringUtils.SPACE;
 		return restClient.mutate()
 				.baseUrl(api.baseUrl())
@@ -56,6 +60,12 @@ enum ExternalApiNames {
 	RESTFULCOUNTRIES("restfulcountries");
 	
 	private final String name;
+	
+	public static boolean existsByName(String name) {
+		return Arrays.stream(ExternalApiNames.values())
+				.map(ExternalApiNames::getName)
+				.anyMatch(value -> value.equalsIgnoreCase(name));
+	}
 	
 }
 

@@ -3,7 +3,7 @@ package tn.movom.app.movom.infrastructure.client;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.RestClientException;
 import tn.movom.app.infra.model.Pagination;
 import tn.movom.app.movom.application.CountryDataRetriever;
 import tn.movom.app.movom.application.CountryInfo;
@@ -79,11 +79,11 @@ class RemoteCountryDataRetriever implements CountryDataRetriever {
 	private static <T> T call(Supplier<T> func, Supplier<T> orElseReturn) {
 		try {
 			T value = func.get();
-			log.info("Called value: {}", value);
+			log.info("Called data: {}", value);
 			return value;
 		}
-		catch (HttpClientErrorException e) {
-			log.error("HttpClientErrorException occurred: ", e);
+		catch (RestClientException e) {
+			log.error("RestClientException occurred: ", e);
 			return orElseReturn.get();
 		}
 		catch (RuntimeException e) {

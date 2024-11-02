@@ -10,7 +10,7 @@ public enum ContinentName {
 	
 	EUROPE("Europe"),
 	AMERICA("America"),
-	AFRIFA("Africa"),
+	AFRICA("Africa"),
 	ASIA("Asia"),
 	AUSTRALIA("Australia");
 	
